@@ -23,6 +23,10 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         ParkingLot newParkingLot = new ParkingLot(name,address);
 
+        List<Spot> spotList = new ArrayList<>();
+
+        newParkingLot.setSpotList(spotList);
+
         parkingLotRepository1.save(newParkingLot);
 
         return newParkingLot;
