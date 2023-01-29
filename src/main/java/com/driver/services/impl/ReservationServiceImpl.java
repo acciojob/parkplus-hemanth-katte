@@ -49,33 +49,33 @@ public class ReservationServiceImpl implements ReservationService {
             for (Spot spot : spotList) {
                 if (requiredSpotType == SpotType.TWO_WHEELER) {
                     if (spot.getSpotType() == requiredSpotType) {
-                        if (spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                        if (spot.getOccupied() == false && spot.getPricePerHour() < price) {
                             requiredSpot = spot;
                             price = spot.getPricePerHour();
                             continue;
                         } else
                             continue;
-                    } else if (spot.getSpotType() == SpotType.FOUR_WHEELER && spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                    } else if (spot.getSpotType() == SpotType.FOUR_WHEELER && spot.getOccupied() == false && spot.getPricePerHour() < price) {
                         requiredSpot = spot;
                         price = spot.getPricePerHour();
                         continue;
-                    } else if (spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                    } else if (spot.getOccupied() == false && spot.getPricePerHour() < price) {
                         requiredSpot = spot;
                         price = spot.getPricePerHour();
                         continue;
                     }
                 } else if (requiredSpotType == SpotType.FOUR_WHEELER) {
-                    if (spot.getSpotType() == requiredSpotType && spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                    if (spot.getSpotType() == requiredSpotType && spot.getOccupied() == false && spot.getPricePerHour() < price) {
                         requiredSpot = spot;
                         price = spot.getPricePerHour();
                         continue;
-                    } else if (spot.getSpotType() == SpotType.OTHERS && spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                    } else if (spot.getSpotType() == SpotType.OTHERS && spot.getOccupied() == false && spot.getPricePerHour() < price) {
                         requiredSpot = spot;
                         price = spot.getPricePerHour();
                         continue;
                     }
                 } else {
-                    if (spot.getSpotType() == SpotType.OTHERS && spot.isOccupied() == false && spot.getPricePerHour() < price) {
+                    if (spot.getSpotType() == SpotType.OTHERS && spot.getOccupied() == false && spot.getPricePerHour() < price) {
                         requiredSpot = spot;
                         price = spot.getPricePerHour();
                         continue;
