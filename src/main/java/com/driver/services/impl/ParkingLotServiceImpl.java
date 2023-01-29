@@ -75,24 +75,42 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     @Override
     public Spot updateSpot(int parkingLotId, int spotId, int pricePerHour) {
 
-        Spot spotToBeUpdated = spotRepository1.findById(spotId).get();
+//        Spot spotToBeUpdated = spotRepository1.findById(spotId).get();
+//
+//        int oldParkingLotId = spotToBeUpdated.getParkingLot().getId();
+//
+//        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
+//
+//        spotToBeUpdated.setPricePerHour(pricePerHour);
+//
+//        if(oldParkingLotId != parkingLotId){
+//            ParkingLot oldParkingLot = parkingLotRepository1.findById(oldParkingLotId).get();
+//            oldParkingLot.getSpotList().remove(spotToBeUpdated);
+//            parkingLotRepository1.save(oldParkingLot);
+//            parkingLot.getSpotList().add(spotToBeUpdated);
+//            spotToBeUpdated.setParkingLot(parkingLot);
+//        }
+//
+//        parkingLotRepository1.save(parkingLot);
+//
+//        return spotToBeUpdated;
 
-        int oldParkingLotId = spotToBeUpdated.getParkingLot().getId();
-
-        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
-
-        spotToBeUpdated.setPricePerHour(pricePerHour);
-
-        if(oldParkingLotId != parkingLotId){
-            ParkingLot oldParkingLot = parkingLotRepository1.findById(oldParkingLotId).get();
-            oldParkingLot.getSpotList().remove(spotToBeUpdated);
-            parkingLotRepository1.save(oldParkingLot);
-            parkingLot.getSpotList().add(spotToBeUpdated);
-            spotToBeUpdated.setParkingLot(parkingLot);
+        ParkingLot parkingLot= parkingLotRepository1.findById(parkingLotId).get();
+        List<Spot> spotList= parkingLot.getSpotList();
+        if(spotList==null){
+            spotList=new ArrayList<>();
         }
 
-        parkingLotRepository1.save(parkingLot);
+        Spot spotToBeUpdated = new Spot();
 
+        for(Spot spot : spotList){
+            if(spot.getId()==spotId){
+                spot.setPricePerHour(pricePerHour);
+                spotToBeUpdated = spot;
+            }
+        }
+
+        spotRepository1.save(spotToBeUpdated);
         return spotToBeUpdated;
 
     }
